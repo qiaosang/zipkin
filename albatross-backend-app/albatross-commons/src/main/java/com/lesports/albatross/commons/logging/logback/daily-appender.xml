@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+File appender logback configuration provided for import, equivalent to the programmatic
+initialization performed by Boot
+-->
+
+<included>
+    <appender name="DAILY_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <Pattern>${FILE_LOG_PATTERN}</Pattern>
+        </encoder>
+
+        <File>${LOG_PATH}/${LOG_FILE}-daily.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <FileNamePattern>${LOG_PATH}/${LOG_FILE}-daily.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>50MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+</included>

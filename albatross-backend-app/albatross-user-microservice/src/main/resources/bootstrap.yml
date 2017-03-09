@@ -1,0 +1,9 @@
+info:
+  serviceId: ${spring.application.name}
+  description: User Services Server
+  profile: ${spring.profiles.active}
+
+spring:
+  application:
+    name: albatross-user-service
+

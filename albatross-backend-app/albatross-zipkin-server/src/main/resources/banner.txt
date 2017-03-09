@@ -1,0 +1,5 @@
+${AnsiColor.BRIGHT_YELLOW}    _   _ _          _                    __  __          _ _
+${AnsiColor.BRIGHT_YELLOW}   /_\ | | |__  __ _| |_ _ _ ___ ______  |  \/  |___ _ _ (_) |_ ___ _ _
+${AnsiColor.BRIGHT_YELLOW}  / _ \| | '_ \/ _` |  _| '_/ _ (_-<_-<  | |\/| / _ \ ' \| |  _/ _ \ '_|
+${AnsiColor.BRIGHT_YELLOW} /_/ \_\_|_.__/\__,_|\__|_| \___/__/__/  |_|  |_\___/_||_|_|\__\___/_|
+${AnsiColor.RED}:: Albatross Zipkin 🤓  :: Running ${AnsiColor.BRIGHT_GREEN}Spring Boot ${spring-boot.formatted-version} ::

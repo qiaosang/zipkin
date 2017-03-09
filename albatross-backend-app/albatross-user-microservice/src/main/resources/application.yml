@@ -1,0 +1,62 @@
+server:
+  context-path: /
+  port: 2001
+  compression:
+    enabled: true
+    mime-types: application/json,text/html
+
+security.basic.enabled: false
+management.security.enabled: false
+
+logging:
+  file: usercenter-service
+  path: /var/log/albatross/
+  level:
+    org.springframework: INFO
+    com.lesports.albatross: INFO
+    com.netflix: WARN
+
+spring:
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5673
+    username: admin
+    password: admin123
+  datasource:
+    hikari:
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      connection-test-query: SELECT 1
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    database: MYSQL
+    show-sql: false
+    generate-ddl: true
+    open-in-view: true
+    database-platform: com.lesports.albatross.commons.hibernate.MySQLInnoDBUTF8Dialect
+    hibernate:
+      ddl-auto: validate
+#      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        show_sql: false
+#  autoconfigure:
+#    exclude: org.springframework.cloud.netflix.servo.ServoMetricsAutoConfiguration
+  #zipkin:
+    # Uncomment to send to zipkin, replacing 10.75.90.71 with your zipkin IP address
+    #baseUrl: http://10.75.90.71:9411
+    #enabled: false
+---
+spring:
+  profiles: dev
+
+logging:
+  path: ${user.home}/albatross-dev-log
+  level:
+    org.springframework: INFO
+    com.lesports.albatross: DEBUG
+    com.netflix: INFO

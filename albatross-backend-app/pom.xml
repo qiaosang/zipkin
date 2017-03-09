@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Put spring boot starter-parent here to handle all dependencies versions
+        conflicts -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.1.RELEASE</version>
+    </parent>
+
+    <groupId>com.lesports</groupId>
+    <artifactId>albatross-backend-apps</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>LeSports Albatross : Backend Applications Repositories</name>
+
+    <modules>
+        
+        <module>albatross-zipkin-server</module>
+
+        <module>albatross-commons</module>
+
+        <module>albatross-user-microservice</module>
+       
+        <module>albatross-community-microservice</module>
+       
+    </modules>
+    <!-- xx -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profile.active>dev</profile.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profile.active>test</profile.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profile.active>prod</profile.active>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <distributionManagement>
+        
+    </distributionManagement>
+
+    <properties>
+
+        <spring-boot.version>1.5.1.RELEASE</spring-boot.version>
+        <spring-loaded.version>1.2.6.RELEASE</spring-loaded.version>
+        <spring-cloud.version>Camden.SR5</spring-cloud.version>
+        <spring-boot-admin.version>1.4.5</spring-boot-admin.version>
+
+        <!-- Maven plugin versions -->
+        <compiler-plugin.version>3.5.1</compiler-plugin.version>
+
+        <!-- Java version -->
+        <javax-inject.version>1</javax-inject.version>
+        <javax-servlet.version>3.1.0</javax-servlet.version>
+        <javax-validation.version>1.1.0.Final</javax-validation.version>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Commons components version -->
+        <commons.lang3.version>3.1</commons.lang3.version>
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+
+        <!-- Persistent layer components version -->
+        <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
+        <jadira.usertype.version>6.0.1.GA</jadira.usertype.version>
+        <hibernate.version>5.2.1.Final</hibernate.version>
+        <hibernate-search.version>5.7.0.CR1</hibernate-search.version>
+        <lombok.version>1.16.10</lombok.version>
+        <springfox.version>2.5.0</springfox.version>
+
+        <!--OVERRIDE: downgrade logback from 1.1.7 to 1.1.6 due to issues described
+            at https://github.com/logstash/logstash-logback-encoder/issues/160 -->
+        <logback-logstash.version>4.7</logback-logstash.version>
+        <logback.version>1.1.9</logback.version>
+        <jcraft.version>0.1.53</jcraft.version>
+
+        <!--OVERRIDE: upgrade mongodb driver version to 3.2.1 -->
+        <mongodb.version>3.2.1</mongodb.version>
+
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>springloaded</artifactId>
+                            <version>${spring-loaded.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>2.17</version>
+                    <executions>
+                        <execution>
+                            <id>validate</id>
+                            <phase>validate</phase>
+                            <configuration>
+                                <configLocation>dev-support/checkstyle.xml</configLocation>
+                                <suppressionsLocation>dev-support/checkstyle-suppressions.xml</suppressionsLocation>
+                                <encoding>UTF-8</encoding>
+                                <consoleOutput>true</consoleOutput>
+                                <failsOnError>true</failsOnError>
+                            </configuration>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>${mongodb.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Albatross services dependencies -->
+
+            <dependency>
+                <groupId>org.jadira.usertype</groupId>
+                <artifactId>usertype.core</artifactId>
+                <version>${jadira.usertype.version}</version>
+            </dependency>
+
+            <!-- @Inject -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax-inject.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
+            </dependency>
+
+            <!--SpringFox dependencies -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.groupbyinc</groupId>
+                <artifactId>common-net</artifactId>
+                <version>26</version>
+            </dependency>
+
+            <!-- fileupload -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.googlecode.xmemcached</groupId>
+                <artifactId>xmemcached</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-search-orm</artifactId>
+                <version>${hibernate-search.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${javax-validation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>${hibernate-jpa.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time-hibernate</artifactId>
+                <version>1.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logback-logstash.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-access</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>6.0.4</version>
+            </dependency>
+            <!--https://mvnrepository.com/artifact/org.dellroad/dellroad-stuff-spring -->
+            <dependency>
+                <groupId>org.dellroad</groupId>
+                <artifactId>dellroad-stuff-spring</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+                <version>2.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui-hystrix</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui-turbine</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui-activiti</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+
+    <pluginRepositories>
+       
+    </pluginRepositories>
+
+    <repositories>
+        
+
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>http://repo.spring.io/libs-snapshot-local</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.spring.io/libs-milestone-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>http://repo.spring.io/libs-release-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

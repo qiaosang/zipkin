@@ -1,0 +1,51 @@
+security.basic.enabled: false
+management.security.enabled: false
+
+server:
+  port: 9411
+
+
+logging:
+  level:
+    ROOT: info
+    org.springframework.web: info
+    org.springframework.cloud: debug
+    com.netflix: debug
+
+  path: /var/log/albatross/
+  file: zipkin-server
+
+spring:
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5673
+    username: admin
+    password: admin123
+  sleuth:
+   # not use sleuth stream to trace zipkin server itself
+    enabled: false
+    #refer to org.springframework.cloud.sleuth.instrument.hystrix.SleuthHystrixAutoConfiguration.java
+    hystrix:
+      strategy:
+        enabled: false
+  datasource:
+    schema: classpath:/mysql.sql
+    url: jdbc:mysql://127.0.0.1:3306/zipkin_dev
+    username: root
+    password: root
+    # Switch this on to create the schema on startup:
+    initialize: false
+    continueOnError: true
+zipkin:
+  storage:
+    type: mysql #mysql #mem
+---
+spring:
+  profiles: dev
+
+logging:
+  path: ${user.home}/albatross-dev-log
+
+

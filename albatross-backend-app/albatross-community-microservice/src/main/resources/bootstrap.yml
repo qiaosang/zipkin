@@ -1,0 +1,8 @@
+info:
+  serviceId: ${spring.application.name}
+  description: Community Services Server
+  profile: ${spring.profiles.active}
+
+spring:
+  application:
+    name: albatross-community-service

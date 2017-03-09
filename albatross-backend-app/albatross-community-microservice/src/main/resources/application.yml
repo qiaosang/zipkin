@@ -1,0 +1,114 @@
+# ==========================================================================
+# :  SPRING APP BASIC INFO
+# ==========================================================================
+
+security:
+  basic:
+    enabled: false
+
+management.security.enabled: false
+
+server:
+  port: 3003
+  context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+  compression:
+    enabled: true
+    mime-types: application/json,text/html
+
+
+
+# ==========================================================================
+# :  LOGBACK LOGGING
+# ==========================================================================
+# Logging configuration
+logging:
+  level:
+    org.springframework: INFO
+    com.lesports: INFO
+  path: /var/log/albatross/
+  file: community-service
+  aspect:
+    enabled: true
+    logging-throwable: true
+
+
+spring:
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5673
+    username: admin
+    password: admin123
+  datasource:
+      connection-test-query: SELECT 1
+      test-while-idle: true
+      validation-interval: 10000
+      log-validation-errors: true
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      default-transaction-isolation: 2
+  jackson:
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  zipkin:
+    # Uncomment to send to zipkin, replacing 10.75.90.71 with your zipkin IP address
+    #baseUrl: http://10.75.90.71:9411
+    enabled: false
+# ==========================================================================
+# :  HIBERNATE
+# ==========================================================================
+  jpa:
+    database: MYSQL
+    show-sql: false
+    generate-ddl: true
+    open-in-view: true
+    database-platform: com.lesports.albatross.commons.hibernate.MySQLInnoDBUTF8Dialect
+    hibernate:
+      ddl-auto: validate
+# Spring Data JPA will take any properties under spring.jpa.properties.* and
+# pass them along (with the prefix stripped) once the EntityManagerFactory is
+# created.
+# Specify the DirectoryProvider to use (the Lucene Directory) or infinispan
+    properties:
+          hibernate:
+            search:
+              default:
+                directory_provider :  filesystem
+                indexBase :  /var/tmp/albatross-community-service/lucene/indexes/
+                indexmanager:  near-real-time
+              lucene_version: LUCENE_49
+              analyzer: org.apache.lucene.analysis.cn.ChineseAnalyzer
+              worker:
+                batch_size: 100
+  data:
+    jpa:
+      repositories:
+        enabled: true
+# ==========================================================================
+# :  Multipart
+# ==========================================================================
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+netflix:
+  metrics:
+    servo:
+      cache-warning-threshold: 10000
+
+---
+spring:
+  profiles: dev
+logging:
+  path: ${user.home}/albatross-dev-log
+  level:
+    org.hibernate: warn
+    com.lesports.albatross.connector: warn
+
+
+
+

@@ -1,0 +1,71 @@
+﻿<html>
+<meta charset="UTF-8">
+<head>
+    <title>测试上传动态</title>
+</head>
+<body>
+<p>
+<h2>通过api网关请求</h2>
+<div>
+    <form action="http://localhost:9999/albatross/v1/moments" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>选择需要上传的图片:</td>
+                <td><input type="file" name="file"/></td>
+            </tr>
+            <tr>
+                <td>userId:</td>
+                <td><input type="text" name="user_id" title="user_id" value="134296787"></td>
+            </tr>
+            <tr>
+                <td>message:</td>
+                <td><input type="text" name="message" title="message"></td>
+            </tr>
+            <tr>
+                <td>time:</td>
+                <td><input type="text" name="time" title="time" value="2016-09-01 12:34:00"></td>
+            </tr>
+            <tr>
+                <td>uuid:</td>
+                <td><input type="text" name="uuid" title="uuid" value="3424253534534654645gfgdsg"></td>
+            </tr>
+        </table>
+        <input type="submit" value="上传"/>
+    </form>
+</div>
+
+<p>
+<h2>直接请求服务实例</h2>
+<div>
+    <form action="http://localhost:3003/v1/moments" method="post" enctype="multipart/form-data">
+
+        <table>
+            <tr>
+                <td>选择需要上传的图片:</td>
+                <td><input type="file" name="file"/></td>
+            </tr>
+            <tr>
+                <td>userId:</td>
+                <td><input type="text" name="user_id" title="user_id" value="324234234"></td>
+            </tr>
+            <tr>
+                <td>message:</td>
+                <td><input type="text" name="message" title="message"></td>
+            </tr>
+
+            <tr>
+                <td>time:</td>
+                <td><input type="text" name="time" title="time" value="2016-09-01 12:34:00"></td>
+            </tr>
+
+            <tr>
+                <td>uuid:</td>
+                <td><input type="text" name="uuid" title="uuid" value="3424253534534654645gfgdsg"></td>
+            </tr>
+        </table>
+        <input type="submit" value="上传"/>
+    </form>
+</div>
+
+</body>
+</html>

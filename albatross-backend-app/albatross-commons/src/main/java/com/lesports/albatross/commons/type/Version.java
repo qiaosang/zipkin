@@ -1,0 +1,74 @@
+package com.lesports.albatross.commons.type;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+/**
+ * Created by Gang Li on 7/11/16.
+ * Copyright © 2016 LeSports Inc. All rights reserved.
+ */
+
+@Data
+public class Version implements Comparable<Version>, Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String version;
+
+    public Version(String version) {
+        if (version == null)
+            throw new IllegalArgumentException("Version can not be null");
+        if (!version.matches("[0-9]+(\\.[0-9]+)*"))
+            throw new IllegalArgumentException("Invalid version format");
+        this.version = version;
+    }
+
+    public static Version of(String string) {
+        return new Version(string);
+    }
+
+    public final String get() {
+        return this.version;
+    }
+
+    @Override
+    public int compareTo(Version that) {
+        if (that == null)
+            return 1;
+        String[] thisParts = this.get().split("\\.");
+        String[] thatParts = that.get().split("\\.");
+        int length = Math.max(thisParts.length, thatParts.length);
+        for (int i = 0; i < length; i++) {
+            int thisPart = i < thisParts.length ?
+                    Integer.parseInt(thisParts[i]) : 0;
+            int thatPart = i < thatParts.length ?
+                    Integer.parseInt(thatParts[i]) : 0;
+            if (thisPart < thatPart)
+                return -1;
+            if (thisPart > thatPart)
+                return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return this.get();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that)
+            return true;
+        if (that == null)
+            return false;
+        if (this.getClass() != that.getClass())
+            return false;
+        return this.compareTo((Version) that) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getVersion().hashCode();
+    }
+}

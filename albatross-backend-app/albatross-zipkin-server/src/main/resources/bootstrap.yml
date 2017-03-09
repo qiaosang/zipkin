@@ -1,0 +1,10 @@
+info:
+  serviceId: ${spring.application.name}
+  description: Zipkin Server
+  profile: ${spring.profiles.active}
+spring:
+  application:
+    name: albatross-zipkin-server
+  cloud:
+    config:
+      allow-override: false

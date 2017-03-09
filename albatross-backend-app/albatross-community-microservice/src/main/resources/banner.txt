@@ -1,0 +1,5 @@
+${AnsiColor.RED}    _   ${AnsiColor.BRIGHT_MAGENTA} _  _           _
+${AnsiColor.RED}   /_\  ${AnsiColor.BRIGHT_MAGENTA}| || |__  __ _ | |_  _ _  ___  ___ ___
+${AnsiColor.RED}  / _ \ ${AnsiColor.BRIGHT_MAGENTA}| || '_ \/ _` ||  _|| '_|/ _ \(_-<(_-<
+${AnsiColor.RED} /_/ \_\${AnsiColor.BRIGHT_MAGENTA}|_||_.__/\__,_| \__||_|  \___//__//__/
+${AnsiColor.RED}:: Albatross ${application.version} 🤓  :: Running Spring Boot ${spring-boot.formatted-version} ::
