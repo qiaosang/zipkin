@@ -1,7 +1,3 @@
-Referenced Example :
-* https://github.com/litzuhsien/spring-boot-microservices.git
-* https://github.com/kbastani/spring-cloud-microservice-example
-
 
 Backend Application Layout:
 
