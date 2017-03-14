@@ -16,10 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 
 @SpringCloudApplication
-@EnableHystrix
 @EnableZipkinStreamServer
-@EnableFeignClients
-@EnableScheduling
 @Slf4j
 public class ZipkinApplication {
 

@@ -19,7 +19,7 @@ spring:
   profiles:
     active: dev
   rabbitmq:
-    host: 127.0.0.1
+    host: 10.11.144.82
     port: 5673
     username: admin
     password: admin123
@@ -40,7 +40,7 @@ spring:
     continueOnError: true
 zipkin:
   storage:
-    type: mysql #mysql #mem
+    type: mem #mysql #mem
 ---
 spring:
   profiles: dev
