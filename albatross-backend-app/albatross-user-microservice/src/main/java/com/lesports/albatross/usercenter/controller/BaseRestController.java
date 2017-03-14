@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by litzuhsien on 9/5/15.
- */
 public class BaseRestController {
 
     private static final String DEFAULT_DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
